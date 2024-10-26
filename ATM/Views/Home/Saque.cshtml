@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Saque";
+}
+
+@model Saque
+
+<div class="text-center">
+    <h1 class="display-4">Saque</h1>
+</div>
+
+@using(Html.BeginForm()){
+    @Html.LabelFor(o => o.Cartao.Numero)
+    @Html.EditorFor(o => o.Cartao.Numero)
+
+    @Html.LabelFor(o => o.Cartao.DataValidade)
+    @Html.EditorFor(o => o.Cartao.DataValidade)
+
+    @Html.LabelFor(o => o.Conta.Senha)
+    @Html.EditorFor(o => o.Conta.Senha)
+}
