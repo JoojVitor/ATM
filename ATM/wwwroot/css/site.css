@@ -20,3 +20,30 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.saldo-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.saque-container {
+    text-align: left;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.saldo-titulo {
+    font-size: 24px;
+    color: #333;
+}
+
+.saldo-valor {
+    font-size: 32px;
+    color: #28a745; /* Verde */
+    font-weight: bold;
+}
