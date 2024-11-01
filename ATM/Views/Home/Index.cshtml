@@ -10,14 +10,4 @@
         <h1 class="saldo-titulo">Seu Saldo</h1>
         <p class="saldo-valor">R$ 1.000,00</p>
     </div>
-    @using (Html.BeginForm("CreateCartaoForm", "Home"))
-    {
-        @Html.LabelFor(o => o.Numero)
-        @Html.EditorFor(o => o.Numero, new { htmlAttributes = new { @class = "form-control" } })
-
-        @Html.LabelFor(o => o.DataValidade)
-        @Html.EditorFor(o => o.DataValidade, new { htmlAttributes = new { @class = "form-control" } })
-
-        <button class="btn btn-primary mt-4" type="submit">Enviar</button>
-    }
 </div>
