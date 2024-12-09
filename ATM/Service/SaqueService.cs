@@ -19,7 +19,7 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Saque model)
+        public async Task<IActionResult> ValidarSaque(Saque model)
         {
             Cartao? cartao = ValidarCartao(model.Cartao).Result;
 
@@ -35,17 +35,30 @@ namespace ATM.Controllers
                 return RedirectToAction("SenhaError", "Home");
             }
 
+            if (conta != null && conta.Saldo < model.Valor)
+            {
+                return RedirectToAction("SaldoError", "Home");
+            }
+
+            if (conta != null && conta.LimiteDiaSaque <  model.Valor)
+            {
+                return RedirectToAction("LimiteError", "Home");
+            }
+
             Saque saque = new()
             {
                 Cartao = cartao,
-                Conta = conta
+                Conta = conta,
+                Valor = model.Valor
             };
 
-            await _dbContext.Saques.AddAsync(saque);
-            await _dbContext.SaveChangesAsync();
+            Add(saque);
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public async void AtualizaSaldo()
 
         [HttpGet]
         public Task<Cartao?> ValidarCartao(Cartao model)
@@ -57,6 +70,25 @@ namespace ATM.Controllers
         public Task<Conta?> ValidarSenha(int codConta)
         {
             return _contaService.Get(codConta);
+        }
+
+        [HttpPost]
+        public async void Add(Saque saque)
+        {
+            await _dbContext.Cartoes.AddAsync(saque.Cartao);
+            await _dbContext.Contas.AddAsync(saque.Conta);
+            await _dbContext.Saques.AddAsync(saque);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        [HttpGet]
+        public IActionResult GetSaques()
+        {
+            var saques = _dbContext.Saques
+                .Include(s => s.Conta)
+                .Include(s => s.Cartao)
+                .ToList();
+            return View(saques);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ATM.Controllers
 
         public IActionResult CreateSaqueForm(Saque model)
         {
-            RedirectToActionResult result = (RedirectToActionResult)_saqueService.Add(model).Result;
+            RedirectToActionResult result = (RedirectToActionResult)_saqueService.ValidarSaque(model).Result;
 
             return View(result.ActionName, result.ControllerName);
         }

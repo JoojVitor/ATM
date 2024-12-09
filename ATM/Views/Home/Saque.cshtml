@@ -9,6 +9,9 @@
     <div class="saque-container">
         @using (Html.BeginForm("CreateSaqueForm", "Home"))
         {
+            @Html.LabelFor(o => o.Valor)
+            @Html.EditorFor(o => o.Valor, new { htmlAttributes = new { @class = "form-control" } })
+            
             @Html.LabelFor(o => o.Cartao.Numero)
             @Html.EditorFor(o => o.Cartao.Numero, new { htmlAttributes = new { @class = "form-control" } })
 
