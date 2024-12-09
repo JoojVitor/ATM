@@ -54,11 +54,16 @@ namespace ATM.Controllers
 
             Add(saque);
 
+            AtualizaSaldoConta(conta.Codigo, saque.Valor);
+
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public async void AtualizaSaldo()
+        public void AtualizaSaldoConta(int codConta, float valor)
+        {
+            _contaService.AtualizaSaldo(codConta, valor);
+        }
 
         [HttpGet]
         public Task<Cartao?> ValidarCartao(Cartao model)

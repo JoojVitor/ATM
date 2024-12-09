@@ -13,6 +13,18 @@ namespace ATM.Service
             _dbContext = dbContext;
         }
 
+        public async void AtualizaSaldo(int codigo, float valor)
+        {
+            var conta = Get(codigo);
+
+            if (conta != null)
+            {
+                conta.Result.Saldo -= valor;
+                _dbContext.Update(conta);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
         public ContaDbContext GetDbContext()
         {
             return _dbContext;
